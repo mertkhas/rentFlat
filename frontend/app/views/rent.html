@@ -1,0 +1,101 @@
+
+<div ng-show="isAuthenticated()" class="container">
+  <div class="row" style="margin-top: 30px">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Kiralama işlemi</div>
+      <div class="panel-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+
+             <form ng-submit="addReservation()" name="rezervation">
+
+               <div class="form-group">
+                 <label>Müşteri Adı</label>
+                 <input type="text" ng-model="cFirstName" class="form-control" required>
+               </div>
+
+               <div class="form-group">
+                 <label>Müşteri Soyadı</label>
+                 <input type="text" ng-model="cLastName" class="form-control" required>
+               </div>
+
+               <div class="form-group">
+                 <label>Müşteri telefon numarası</label>
+                 <input type="text" ng-model="cPhone" class="form-control" required>
+               </div>
+
+               <div class="form-group">
+                <label>Giriş Tarihi</label>
+                 <datepicker date-format="yyyy-MM-dd"  selector="form-control" >
+                   <div class="input-group">
+                     <input ng-model="startDate" ng-change="calculateDay()" class="form-control" placeholder="Lütfen bir tarih seçiniz" required/>
+                     <span class="input-group-addon" style="cursor: pointer">
+                       <i class="fa fa-lg fa-calendar"></i></span>
+                   </div>
+                 </datepicker>
+               </div>
+
+               <div class="form-group">
+                 <label>Çıkış Tarihi</label>
+                 <datepicker date-format="yyyy-MM-dd" selector="form-control">
+                   <div class="input-group">
+                     <input ng-model="endDate" ng-change="calculateDay()" class="form-control" placeholder="Lütfen bir tarih seçiniz" required/>
+                     <span class="input-group-addon" style="cursor: pointer">
+                       <i class="fa fa-lg fa-calendar"></i></span>
+                   </div>
+                 </datepicker>
+               </div>
+
+               <div class="form-group">
+                 <label>Günlük ücret</label>
+                 <input ng-model="dailyPrice" type="number" class="form-control" required>
+               </div>
+
+               <div class="form-group">
+                 <label>Not</label>
+                 <textarea ng-model="note" type="text" class="form-control" rows="5"></textarea>
+               </div>
+
+               <button type="submit" ng-disabled="rezervation.$invalid" class="btn btn-default">Kayıt yap</button>
+
+             </form>
+
+            </div>
+            <div class="col-md-4">
+              <div class="col-md-12">
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    Kiralama bilgileri
+                  </div>
+                  <div class="panel-body">
+                    <p>Müşteri : <label>{{cFirstName}} {{cLastName}}</label></p>
+                    <p>Telefon : <label>{{cPhone}}</label></p>
+                    <p>Giriş : <label>{{ startDate | date:'dd-MM-yyyy'}}</label></p>
+                    <p>Çıkış : <label>{{ endDate | date:'dd-MM-yyyy'}}</label></p>
+                    <p>Gün : <label>{{day}}</label></p>
+                    <p>Toplam : <label ng-show="dailyPrice">{{dailyPrice * day}} TL</label></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="panel panel-success">
+                  <div class="panel-heading">
+                    Boş daireler
+                  </div>
+                  <div class="panel-body">
+                    <select size="10" class="form-control" ng-model="selectedFlat" ng-options="flat.Id as flat.flatName for flat in flats">
+                          <option value="">Daire seçin</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-show="!isAuthenticated()">Bu sayfayı görüntülemek için lütfen giriş yapınız. <a ui-sref="login">Giriş yap</a></div>

@@ -1,0 +1,102 @@
+
+<div ng-show="isAuthenticated()" class="container">
+  <div class="row" style="margin-top: 30px">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Kiralamalar ( son 5 kiralama )  </div>
+      <div class="panel-body">
+
+        <div class="container">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Ad</th>
+                  <th>Soyad</th>
+                  <th>Telefon</th>
+                  <th>Giriş Tarihi</th>
+                  <th>Çıkış Tarihi</th>
+                  <th>Günlük Fiyat</th>
+                  <th>Toplam Fiyat</th>
+                  <th>Daire</th>
+                </tr>
+                </thead>
+                <tbody ng-repeat="rental in rentals">
+                <tr>
+                  <th>{{rental.Id}}</th>
+                  <th>{{rental.cFirstName}}</th>
+                  <th>{{rental.cLastName}}</th>
+                  <th>{{rental.customerPhone}}</th>
+                  <th>{{rental.startDate | date:'dd-MM-yyyy'}}</th>
+                  <th>{{rental.endDate |  date:'dd-MM-yyyy' }}</th>
+                  <th>{{rental.dailyPrice}} TL</th>
+                  <th>{{rental.totalPrice}} TL</th>
+                  <th>{{rental.flatName}}</th>
+                </tr>
+                </tbody>
+              </table>
+        </div>
+        </div>
+      <!-- first container end -->
+  </div>
+</div>
+
+  <div ng-show="isAuthenticated()" class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="well">
+              <h4 class="text-danger"><span class="label label-danger pull-right">{{resCount}}</span> Kiralama Sayısı </h4>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="well">
+              <h4 class="text-success"><span class="label label-success pull-right">{{resCiro}} TL</span> Ciro </h4>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="well">
+              <h4 class="text-primary"><span class="label label-primary pull-right">{{maxDate}} Gün</span> En uzun Süre </h4>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="well">
+              <h4 class="text-success"><span class="label label-success pull-right">{{flatCount}}</span> Daire Sayısı </h4>
+            </div>
+          </div>
+        </div><!--/row-->
+      </div><!--/col-12-->
+    </div><!--/row-->
+  </div></div>
+<!-- second container end -->
+  <div ng-show="isAuthenticated()" class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="panel panel-success">
+            <div class="panel-heading">Geçmiş kiralamalar</div>
+            <div class="panel-body" style="height: 200px">
+              A
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-danger">
+            <div class="panel-heading">Yaklaşan kiralamalar</div>
+            <div class="panel-body" style="height: 200px" >
+              <p>3 gün içindeki kiralamalar</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-info">
+            <div class="panel-heading">İleriki kiralamalar</div>
+            <div class="panel-body" style="height: 200px">
+              <p>15 günden sonraki kiralamalar</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+<div ng-show="!isAuthenticated()">Bu sayfayı görüntülemek için lütfen giriş yapınız. <a ui-sref="login">Giriş yap</a></div>

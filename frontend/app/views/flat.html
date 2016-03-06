@@ -1,0 +1,96 @@
+ <style type="text/css">
+  .selected {
+    background-color:grey;
+    color:white;
+    font-weight:bold;
+  }
+</style>
+
+
+<div ng-show="isAuthenticated()" class="container">
+
+
+
+  <div class="row" style="margin-top: 30px">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Daireler</div>
+      <div class="panel-body">
+        <div class="col-md-8">
+          <div class="row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+              Ara &nbsp;&nbsp;&nbsp;<input type="text" ng-model="search" ng-change="refreshList()">
+            </div>
+          </div>
+
+          <table style="margin-top: 20px" class="table">
+            <thead>
+            <th>#</th>
+            <th>Daire Adı</th>
+            <th>Daire Açıklaması</th>
+            </thead>
+            <tbody ng-repeat="flat in flats" ng-class="{'selected':$index == selectedRow}" ng-click="setClickedRow($index)">
+
+            <tr ng-click="clickedRow(flat.Id)">
+              <td></td>
+              <td>{{flat.flatName}}</td>
+              <td>{{flat.flatDescription}}</td>
+            </tr>
+            </tbody>
+
+          </table>
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-primary">
+            <div class="panel-heading">Düzenle</div>
+            <div class="panel-body">
+              <form name="edit" ng-submit="edt()">
+                <input type="hidden" ng-model="hiddenId" required>
+                <div class="form-group">
+                  <label>Daire Adı</label>
+                  <input type="text" ng-model="editName" required class="form-control">
+                </div>
+                <div class="form-group">
+                  <label>Daire açıklaması</label>
+                  <textarea type="text" ng-model="editDescription" class="form-control" ></textarea>
+                </div>
+                <button type="submit" ng-disabled="edit.$invalid" class="btn btn-default">Değiştir</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- div class row -->
+  <div class="row">
+    <div class="col-md-8">
+      <div class="panel panel-primary">
+        <div class="panel-heading">Yeni daire ekleme formu</div>
+        <div class="panel-body">
+          <form name="ekle"  ng-submit="add()">
+            <div class="form-group">
+              <label>Daire Adı</label>
+              <input type="text" ng-model="flatName"  class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label>Daire açıklaması</label>
+              <textarea type="text" ng-model="flatDescription" class="form-control" ></textarea>
+            </div>
+            <button type="submit"  ng-disabled="ekle.$invalid" class="btn btn-default">Kaydet</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+
+    </div>
+  </div>
+
+
+
+</div>
+
+<div ng-show="!isAuthenticated()">Bu sayfayı görüntülemek için lütfen giriş yapınız. <a ui-sref="login">Giriş yap</a> </div>
